@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-fallback-key-for-dev-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*'] # Em produção, o Railway/Render injeta o domínio automaticamente
+ALLOWED_HOSTS = ['*'] 
 
 # Application definition
 INSTALLED_APPS = [
@@ -25,18 +25,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    # Apps de terceiros (produção e CORS)
+    # Apps de terceiros
     'whitenoise.runserver_nostatic',
-    'corsheaders',
+    'corsheaders', # <--- Já estava certo!
     
     # Seu app local
     'tasks',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',      # <--- CORREÇÃO: TEM QUE SER O PRIMEIRO DA LISTA!
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # WhiteNoise para arquivos estáticos
-    'corsheaders.middleware.CorsMiddleware',      # CORS para o frontend
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -66,8 +66,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'taskmanager.wsgi.application'
 
 # Database
-# Usa PostgreSQL se a variável DATABASE_URL existir (no Railway/Render), 
-# senão usa o SQLite local (db.sqlite3).
 DATABASES = {
     'default': dj_database_url.config(
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"
