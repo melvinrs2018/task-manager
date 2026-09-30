@@ -27,14 +27,15 @@ INSTALLED_APPS = [
     
     # Apps de terceiros
     'whitenoise.runserver_nostatic',
-    'corsheaders', # <--- Já estava certo!
+    'corsheaders',
+    'rest_framework',  # <--- AQUI ESTAVA FALTANDO! ADICIONADO.
     
     # Seu app local
     'tasks',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',      # <--- CORREÇÃO: TEM QUE SER O PRIMEIRO DA LISTA!
+    'corsheaders.middleware.CorsMiddleware',      # <--- CORRETO: PRIMEIRO DA LISTA
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', 
     'django.contrib.sessions.middleware.SessionMiddleware',
