@@ -1,12 +1,7 @@
 ﻿import { useState, useEffect } from "react"
 import axios from "axios"
 
-// LÓGICA AUTOMÁTICA:
-// Se estiver em produção (Vercel), usa o PythonAnywhere.
-// Se estiver em desenvolvimento (seu PC com npm run dev), usa o localhost.
-const API_URL = import.meta.env.PROD 
-  ? "https://melvinrs.pythonanywhere.com/api/tasks/" 
-  : "http://127.0.0.1:8000/api/tasks/"
+const API_URL = (import.meta.env.VITE_API_URL || "http://127.0.0.1:8000") + "/api/tasks/"
 
 const formatDate = (iso) =>
   new Date(iso).toLocaleString("en-GB", {
@@ -164,5 +159,22 @@ function App() {
     </div>
   )
 }
+      {/* 👇 RODAPÉ PROFISSIONAL 👇 */}
+      <footer style={{ 
+        marginTop: "auto", /* Empurra para o final da página */
+        padding: "20px", 
+        textAlign: "center", 
+        fontSize: "11px", 
+        color: "#6b7280", /* Cor chumbo prateada */
+        borderTop: "1px solid #e2e8f0",
+        backgroundColor: "#f8fafc"
+      }}>
+        <div style={{ textTransform: "uppercase", marginBottom: "4px" }}>
+          Powered by getconnect
+        </div>
+        <div>
+          Melvin Fernandes
+        </div>
+      </footer>
 
 export default App
