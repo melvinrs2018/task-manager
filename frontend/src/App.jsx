@@ -124,7 +124,8 @@ function App() {
   )
 
   return (
-    <div className="app">
+    // Adicionado estilo para garantir que o rodapé vá para o final da tela
+    <div className="app" style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <h1>Task Manager</h1>
 
       <form onSubmit={addTask} className="task-form">
@@ -156,16 +157,14 @@ function App() {
           {completed.length === 0 && <p className="empty">No completed tasks</p>}
         </div>
       </div>
-    </div>
-  )
-}
-      {/* 👇 RODAPÉ PROFISSIONAL 👇 */}
+
+      {/* 👇 AGORA O RODAPÉ ESTÁ DENTRO DO RETURN, NO LUGAR CERTO! 👇 */}
       <footer style={{ 
-        marginTop: "auto", /* Empurra para o final da página */
+        marginTop: "auto", 
         padding: "20px", 
         textAlign: "center", 
         fontSize: "11px", 
-        color: "#6b7280", /* Cor chumbo prateada */
+        color: "#6b7280", 
         borderTop: "1px solid #e2e8f0",
         backgroundColor: "#f8fafc"
       }}>
@@ -176,5 +175,9 @@ function App() {
           Melvin Fernandes
         </div>
       </footer>
+
+    </div>
+  )
+}
 
 export default App
